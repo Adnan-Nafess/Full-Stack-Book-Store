@@ -23,6 +23,13 @@ app.use("/api/v1/favourites", favouriteRoutes);
 app.use("/api/v1/carts", cartRoutes);
 app.use("/api/v1/orders", orderRoutes);
 
+app.get('/', (req, res)=> {
+  res.send({
+      activeStatus: true,
+      error: false,
+  })
+})
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
