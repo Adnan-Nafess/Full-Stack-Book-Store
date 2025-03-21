@@ -17,7 +17,10 @@ const Profile = () => {
   useEffect(() => {
     try {
      const fetch = async () => {
-       const response = await axios.get(`http://localhost:3000/api/v1/users//get-user-information`, {headers})
+       const response = await axios.get(
+         `https://full-stack-book-store-gamma.vercel.app/api/v1/users//get-user-information`,
+         { headers }
+       );
        setProfile(response.data);
      }
      fetch();  

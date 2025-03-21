@@ -10,7 +10,9 @@ const RecentlyAdded = () => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/books/get-recent-books");
+                const response = await axios.get(
+                  "https://full-stack-book-store-gamma.vercel.app/api/v1/books/get-recent-books"
+                );
                 setData(response.data.data || response.data.books); 
             } catch (error) {
                 console.error("Error fetching data:", error); 

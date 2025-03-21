@@ -22,7 +22,10 @@ const SignUp = () => {
       if(values.username === "" || values.email === "" || values.password === "" || values.address === "") {
         alert("All fields are required");
       }else {
-        const response = await axios.post("http://localhost:3000/api/v1/users/sign-up", values);
+        const response = await axios.post(
+          "https://full-stack-book-store-gamma.vercel.app/api/v1/users/sign-up",
+          values
+        );
         alert(response.data.message);
         navigate("/LogIn");
       }

@@ -11,8 +11,8 @@ const AllOrders = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [status, setStatus] = useState("");
     const [loading, setLoading] = useState(true);
-    const [userdiv, setuserDiv] = useState("hidden");
-    const [userdivdata, setuserDivData] = useState();
+    const [userdiv, setUserDiv] = useState(false); // Use boolean instead of string
+    const [userdivdata, setUserDivData] = useState(null); // Initialize as null
 
     const headers = {
         id: localStorage.getItem("id"),
@@ -23,8 +23,8 @@ const AllOrders = () => {
         const fetchOrders = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:3000/api/v1/orders/get-all-orders",
-                    { headers }
+                  "https://full-stack-book-store-gamma.vercel.app/api/v1/orders/get-all-orders",
+                  { headers }
                 );
                 const validOrders = response.data.data.filter(order => order.book);
                 setAllOrders(validOrders || []);
@@ -49,9 +49,9 @@ const AllOrders = () => {
         try {
             // Backend se status update karwana
             const response = await axios.put(
-                `http://localhost:3000/api/v1/orders/update-status/${orderId}`,
-                { status: newStatus }, // Updated status bhejo
-                { headers }
+              `https://full-stack-book-store-gamma.vercel.app/api/v1/orders/update-status/${orderId}`,
+              { status: newStatus }, // Updated status bhejo
+              { headers }
             );
 
             alert(response.data.message);
@@ -131,8 +131,8 @@ const AllOrders = () => {
                     <button
                         onClick={() => {
                             console.log("User data:", item.user); // Debugging ke liye
-                            setuserDiv("fixed");
-                            setuserDivData(item.user); // Check karo ki user ka data aa raha hai ya nahi
+                            setUserDiv(true); // Open user data modal
+                            setUserDivData(item.user); // Set the user data
                         }}
                         className="text-xl hover:text-orange-500"
                     >
@@ -140,16 +140,14 @@ const AllOrders = () => {
                     </button>
                 </div>
             ))}
-           {userdivdata && (
-            <SeeUserData 
-              userdivdata={userdivdata}
-              userdiv={userdiv}
-              setuserDiv={setuserDiv}
-            />
-           )}
+            {userdivdata && userdiv && (
+                <SeeUserData
+                    userdivdata={userdivdata}
+                    setUserDiv={setUserDiv} // Close modal
+                />
+            )}
         </div>
     );
-
 };
 
 export default AllOrders;

@@ -21,7 +21,9 @@ const BookDetails = () => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/books/get-book-by-id/${id}`);
+                const response = await axios.get(
+                  `https://full-stack-book-store-gamma.vercel.app/api/v1/books/get-book-by-id/${id}`
+                );
                 console.log(response);
                 setData(response.data.data || response.data.books);
             } catch (error) {
@@ -41,7 +43,11 @@ const BookDetails = () => {
 
     const favouriteHandler = async () => {
         try{
-            const response = await axios.put(`http://localhost:3000/api/v1/favourites/add-book-to-favourite`,{},{headers});
+            const response = await axios.put(
+              `https://full-stack-book-store-gamma.vercel.app/api/v1/favourites/add-book-to-favourite`,
+              {},
+              { headers }
+            );
           alert(response.data.message);
         }catch(err){
           console.log(err)
@@ -50,7 +56,11 @@ const BookDetails = () => {
 
     const addToCartHandler = async () => {
         try {
-            const response = await axios.put(`http://localhost:3000/api/v1/carts/add-to-cart`, {}, { headers });
+            const response = await axios.put(
+              `https://full-stack-book-store-gamma.vercel.app/api/v1/carts/add-to-cart`,
+              {},
+              { headers }
+            );
             alert(response.data.message);
         } catch (err) {
             console.log(err)
@@ -59,7 +69,11 @@ const BookDetails = () => {
 
     const deleteBook = async () => {
         try {
-            const response = await axios.delete("http://localhost:3000/api/v1/books/delete-book", {headers}, {id})
+            const response = await axios.delete(
+              "https://full-stack-book-store-gamma.vercel.app/api/v1/books/delete-book",
+              { headers },
+              { id }
+            );
             alert(response.data.message);
             navigate("/all-books")
         }catch (err) {

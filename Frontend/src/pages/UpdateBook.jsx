@@ -38,7 +38,11 @@ const UpdateBook = () => {
             ) {
                 alert("All fields are required");
             } else {
-                const response = await axios.put("http://localhost:3000/api/v1/books/update-book", data, { headers });
+                const response = await axios.put(
+                  "https://full-stack-book-store-gamma.vercel.app/api/v1/books/update-book",
+                  data,
+                  { headers }
+                );
                 setData({
                     url: "",
                     title: "",
@@ -58,7 +62,9 @@ const UpdateBook = () => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/books/get-book-by-id/${id}`)
+                const response = await axios.get(
+                  `https://full-stack-book-store-gamma.vercel.app/api/v1/books/get-book-by-id/${id}`
+                );
                 setData(response.data.data);
             } catch (error) {
                 console.log(error)
