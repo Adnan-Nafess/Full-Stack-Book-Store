@@ -12,7 +12,13 @@ const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: "https://full-stack-book-store-frontend.vercel.app/", // Change this to your actual frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
